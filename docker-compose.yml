@@ -5,27 +5,29 @@ services:
         build: ./mosquitto
         network_mode: "host"
         volumes:
-            - mosquitto:/opt/mosquitto
-            - mosquitto/logs:/var/log/mosquitto
-            - mosquitto/certs/trusted:/etc/mosquitto/certs
+            - ./mosquitto:/opt/mosquitto
+            - ./mosquitto/logs:/var/log/mosquitto
+            - ./mosquitto/certs/trusted:/etc/mosquitto/certs
         ports:
             - 1883:1883
             - 8883:8883
             - 9883:9883
 
-    openhab:
-        image: "openhab/openhab:2.1.0-armhf-debian"
+    openhab-service:
+        image: "openhab/openhab:2.1.0-amd64-debian"  # armhf for Raspberry3
         restart: always
         network_mode: host
         tty: true
         volumes:
-            - "/etc/localtime:/etc/localtime:ro"
-            - "/etc/timezone:/etc/timezone:ro"
-            - "openhan/addons:/openhab/addons"
-            - "openhab/conf:/openhab/conf"
-            - "openhab/userdata:/openhab/userdata"
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+            # - ./openhab/addons:/openhab/addons
+            # - ./openhab/conf:/openhab/conf
+            # - ./openhab/userdata:/openhab/userdata
         devices:
-            - "/dev/ttyUSB0"
+            - /dev/ttyUSB0
         environment:
-            OPENHAB_HTTP_PORT: "8080"
-            OPENHAB_HTTPS_PORT: "8443"
+            OPENHAB_HTTP_PORT: 8080
+            OPENHAB_HTTPS_PORT: 8443
+            USER_ID: 999
+            GROUP_ID: 998
