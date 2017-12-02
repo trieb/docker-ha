@@ -5,9 +5,9 @@ services:
         build: ./mosquitto
         network_mode: "host"
         volumes:
-            - /opt/mosquitto:/opt/mosquitto
-            - /opt/mosquitto/logs:/var/log/mosquitto
-            - /opt/mosquitto/certs/trusted:/etc/mosquitto/certs
+            - mosquitto:/opt/mosquitto
+            - mosquitto/logs:/var/log/mosquitto
+            - mosquitto/certs/trusted:/etc/mosquitto/certs
         ports:
             - 1883:1883
             - 8883:8883
