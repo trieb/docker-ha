@@ -32,3 +32,32 @@ services:
             OPENHAB_HTTPS_PORT: 8443
             USER_ID: 999
             GROUP_ID: 998
+
+   influxdb-service:
+     image: influxdb:latest
+     restart: always
+     volumes:
+        -v /etc/localtime:/etc/localtime:ro
+        -v /opt/influxdb:/var/lib/influxdb
+        -v /opt/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+     environment:
+        - INFLUXDB_DATA_QUERY_LOG_ENABLED=false
+        - INFLUXDB_HTTP_AUTH_ENABLED=true
+        - INFLUXDB_HTTP_LOG_ENABLED=false
+        - INFLUXDB_DATA_ENGINE=tsm1
+        - INFLUXDB_REPORTING_DISABLED=false
+     ports:
+        - 8083:8083
+        - 8086:8086
+
+    grafana-service:
+      image: grafana/grafana:latest
+      restart: always
+      volumes:
+        -v /opt/influxdb/grafana.ini:/etc/grafana/grafana.ini
+        -v /opt/influxdb:/var/lib/grafana
+        -v /etc/localtime:/etc/localtime:ro grafana/grafana
+      environment:
+        - GF_INSTALL_PLUGINS=grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
+      ports:
+        -p 3000:3000
