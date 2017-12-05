@@ -2,15 +2,16 @@ version: '3'
 
 services:
     mosquitto-service:
-        build: ./mosquitto
-        network_mode: "host"
+        build:
+            context: ./mosquitto
+            dockerfile: Dockerfile_source
         volumes:
-            - ./mosquitto:/opt/mosquitto
-            - ./mosquitto/logs:/var/log/mosquitto
-            - ./mosquitto/certs/trusted:/etc/mosquitto/certs
+            - ~/git/docker-ha/mosquitto:/opt/mosquitto
+            - ~/git/docker-ha/mosquitto/log:/var/log/mosquitto
         ports:
             - 1883:1883
             - 8883:8883
+            - 9001:9001
             - 9883:9883
 
     openhab-service:
@@ -21,9 +22,9 @@ services:
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            # - ./openhab/addons:/openhab/addons
-            # - ./openhab/conf:/openhab/conf
-            # - ./openhab/userdata:/openhab/userdata
+            # - ~/git/docker-ha/openhab/addons:/openhab/addons
+            # - ~/git/docker-ha/openhab/conf:/openhab/conf
+            # - ~/git/docker-ha/openhab/userdata:/openhab/userdata
         devices:
             - /dev/ttyUSB0
         environment:
