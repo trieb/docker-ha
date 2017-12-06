@@ -19,7 +19,7 @@ Run comtainer:
 
 #### docker-compose
 
-Build image:
+Build images:
 
 `docker-compose build`
 
