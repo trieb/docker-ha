@@ -35,20 +35,23 @@ Start service:
 * `tcp/9001  websocket`
 * `tcp/9883  websocket SSL/TLS`
 
-## Problems 
+## Security
 
-If you get: 
+* Node that .acl and .passwd-files are located under /config/conf.d/.
 
-`Error: Unable to open log file /var/log/mosquitto/mosquitto.log for writing.` 
+## Problems
 
-make sure that the files in the directory `log` are writable. 
+If you get:
 
-Try: 
+`Error: Unable to open log file /var/log/mosquitto/mosquitto.log for writing.`
+
+make sure that the files in the directory `log` are writable.
+
+Try:
 
 `sudo chwon -R $USER:$USER log/`
 
-and create an empty file: 
+and create an empty file:
 
 * `touch log/moquitto.log`
-* `sudo chmod 777 log/mosquitto.log` 
-
+* `sudo chmod 777 log/mosquitto.log`
