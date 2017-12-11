@@ -6,7 +6,6 @@ services:
             context: ./mosquitto
             dockerfile: Dockerfile_source
         volumes:
-            - /opt/mosquitto:/opt/mosquitto/:ro
             - /opt/mosquitto/logs/:/var/log/mosquitto
             - /opt/mosquitto/certs:/opt/mosquitto/certs:ro
         ports:
