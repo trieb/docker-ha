@@ -19,3 +19,64 @@ Add regular user to the `openhab`group
 Make sure the user `openhab` own the openhab directories
 
 * `sudo chown -R openhab:openhab openhab/`
+
+### Addons
+
+The addons should be placed in `/opt/openhab/addons/`
+
+Example of addons:
+
+* Astro
+* Mail
+* Mqtt
+* Nma
+* Hue
+* OwnTracks
+* NetworkHealth
+* RfxCom
+* Weather
+* TTS
+* MyOpenhabCloud
+* ChromeCast
+* HTTP
+
+## Influxdb
+
+### Documentation
+
+https://hub.docker.com/_/influxdb/
+
+### Create the database and the users
+
+```
+$ influx
+Connected to http://localhost:8086 version 0.13
+InfluxDB shell version: 0.13
+> CREATE DATABASE openhab_db
+> CREATE USER admin WITH PASSWORD 'adminpassword123+' WITH ALL PRIVILEGES
+> CREATE USER openhab WITH PASSWORD 'openhabpassword123-'
+> CREATE USER grafana WITH PASSWORD 'grafanapassword123?'
+> GRANT ALL ON openhab_db TO openhab
+> GRANT READ ON openhab_db TO grafana
+> exit
+```
+
+### Using the API to setup database
+
+Use the API to create the database and the users:
+
+curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE DATABASE openhab_db"
+curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE USER admin WITH PASSWORD 'adminpassword123' WITH ALL PRIVILEGES"
+curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE USER openhab WITH PASSWORD 'openhabpassword123'"
+curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE USER grafana WITH PASSWORD 'grafanapassword123'"
+curl -i -XPOST  http://localhost:8086/query --data-binary "q=GRANT ALL ON openhab_db TO openhab"
+curl -i -XPOST  http://localhost:8086/query --data-binary "q=GRANT READ ON openhab_db TO grafana"
+
+### Ports
+
+* 8086 HTTP API port
+* 8083 Administrator interface port, if it is enabled
+* 2003 Graphite support, if it is enabled
+
+
+## Telegraf
