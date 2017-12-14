@@ -22,7 +22,9 @@ Make sure the user `openhab` own the openhab directories
 
 ### Addons
 
-The addons should be placed in `/opt/openhab/addons/`
+The addons `<addon>.jar` should be placed in `/opt/openhab/addons/`
+The corresponding config files `<addon>.cfg` file should be placed under `/opt/openhab/conf/services/`
+You can find templates for the condig files under `./addon_configurations/`.
 
 Example of addons:
 
@@ -65,12 +67,14 @@ InfluxDB shell version: 0.13
 
 Use the API to create the database and the users:
 
-curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE DATABASE openhab_db"
-curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE USER admin WITH PASSWORD 'adminpassword123' WITH ALL PRIVILEGES"
-curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE USER openhab WITH PASSWORD 'openhabpassword123'"
-curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE USER grafana WITH PASSWORD 'grafanapassword123'"
-curl -i -XPOST  http://localhost:8086/query --data-binary "q=GRANT ALL ON openhab_db TO openhab"
-curl -i -XPOST  http://localhost:8086/query --data-binary "q=GRANT READ ON openhab_db TO grafana"
+```
+$ curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE DATABASE openhab_db"
+$ curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE USER admin WITH PASSWORD 'adminpassword123' WITH ALL PRIVILEGES"
+$ curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE USER openhab WITH PASSWORD 'openhabpassword123'"
+$ curl -i -XPOST  http://localhost:8086/query --data-binary "q=CREATE USER grafana WITH PASSWORD 'grafanapassword123'"
+$ curl -i -XPOST  http://localhost:8086/query --data-binary "q=GRANT ALL ON openhab_db TO openhab"
+$ curl -i -XPOST  http://localhost:8086/query --data-binary "q=GRANT READ ON openhab_db TO grafana"
+```
 
 ### Ports
 
