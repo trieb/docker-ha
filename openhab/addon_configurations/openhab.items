@@ -1,0 +1,6 @@
+Group gK70 (All)
+
+Number K70_Humidity    "Humidity [%.1f %%]"  <water>       (gK70)  {mqtt="<[mosquitto:laxryggen/k70/humidity:state:default]"}
+Number K70_Co2         "Co2 [%.1f ppm]"      <co2>         (gK70)  {mqtt="<[mosquitto:laxryggen/k70/ppm:state:default]"}
+Number K70_Temperature "Temperature [%.1f]"  <temperature> (gK70)  {mqtt="<[mosquitto:laxryggen/k70/temperature:state:default]"}
+Number K70_rrsi        "Rssi [%d]"           <temperature> (gK70)  {mqtt="<[mosquitto:laxryggen/k70/rssi:state:default]"}

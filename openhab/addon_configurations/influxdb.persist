@@ -1,0 +1,10 @@
+Strategies {
+    everyMinute : "0 * * * * ?"
+    everyHour   : "0 0 * * * ?"
+    everyDay    : "0 0 0 * * ?"
+}
+
+Items {
+    gK70*,   : strategy = everyMinute
+    K70_Co2  : strategy = everyChange
+}
