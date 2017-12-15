@@ -32,6 +32,9 @@ services:
             OPENHAB_HTTPS_PORT: 8443
             USER_ID: 999
             GROUP_ID: 998
+        depends_on:
+            - influxdb-service
+            - mosquitto-service
 
     influxdb-service:
         image: influxdb:latest
@@ -60,6 +63,8 @@ services:
             - GF_INSTALL_PLUGINS=grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
         ports:
             - 3000:3000
+        depends_on:
+            - influxdb-service
 
     telegraf-service:
         image: telegraf:latest
@@ -68,3 +73,6 @@ services:
             - influxdb-service
         volumes:
             - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+        depends_on:
+            - influxdb-service
+            - mosquitto-service
