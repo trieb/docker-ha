@@ -5,6 +5,6 @@ Strategies {
 }
 
 Items {
-    gK70*,   : strategy = everyMinute
+    gK70*   : strategy = everyHour
     K70_Co2  : strategy = everyChange
 }

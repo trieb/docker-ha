@@ -22,8 +22,10 @@ Make sure the user `openhab` own the openhab directories
 
 ### Addons
 
-The addons `<addon>.jar` should be placed in `/opt/openhab/addons/`
-The corresponding config files `<addon>.cfg` file should be placed under `/opt/openhab/conf/services/`
+1. Place `openhab-addons-2.1.0.kar.kar` in `/opt/openhab/addons/`
+2. Edit `addons.cfg under `/opt/openhab/conf/services/`
+3. Add corresponding config files `<addon>.cfg` under `/opt/openhab/conf/services/`
+
 You can find templates for the condig files under `./addon_configurations/`.
 
 Example of addons:
@@ -41,6 +43,11 @@ Example of addons:
 * MyOpenhabCloud
 * ChromeCast
 * HTTP
+
+### Problems
+
+When I first added the `mqtt.cfg` it had a missed to enter username and passord for the broker. I then removed the `mqtt.config` under `/opt/openhab/userdata/config/org/openhab`
+and restarted openhab.
 
 ## Influxdb
 
